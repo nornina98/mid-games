@@ -1,0 +1,186 @@
+@import "@fontsource/nunito/400.css";
+@import "@fontsource/nunito/700.css";
+@import "@fontsource/nunito/800.css";
+@import "@fontsource/fredoka/500.css";
+@import "@fontsource/fredoka/600.css";
+@import "tailwindcss";
+
+@theme {
+  --color-mahligai: #ed1c24;
+  --color-mahligai-dark: #b0121a;
+  --color-charcoal: #202020;
+  --color-cement: #747474;
+  --color-offwhite: #f4f1ec;
+  --color-brick: #c25e3a;
+  --color-gold: #d2a84a;
+  --color-safety: #f2c522;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #14100e;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Pastikan semua kawasan scroll berfungsi lancar pada telefon */
+[class~="overflow-y-auto"] {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+.font-display {
+  font-family: "Fredoka", "Nunito", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Gaya UI game (skrin luar gameplay) ---------- */
+.page-sky {
+  background:
+    radial-gradient(420px 180px at 85% 0%, rgba(255, 244, 200, 0.55) 0%, rgba(255, 244, 200, 0) 70%),
+    linear-gradient(180deg, #c3e7fb 0%, #e6f3f0 40%, #f4f1ec 100%);
+}
+
+.game-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow:
+    0 4px 0 rgba(32, 32, 32, 0.10),
+    0 12px 26px rgba(32, 32, 32, 0.12);
+}
+
+.hazard-strip {
+  height: 6px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(45deg, #f2c522 0 12px, #202020 12px 24px);
+  opacity: 0.85;
+}
+
+@keyframes confettifall {
+  0% { transform: translateY(-40px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(560px) rotate(720deg); opacity: 0.15; }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation: confettifall 2.8s linear infinite;
+}
+
+.reduced-motion .confetti-piece {
+  animation: none;
+  display: none;
+}
+
+#root {
+  height: 100vh; /* fallback browser lama */
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #2a2320 0%, #14100e 70%);
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 480px;
+  height: 100vh; /* fallback */
+  height: 100dvh;
+  position: relative;
+  background: var(--color-offwhite);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.55);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.game-touch {
+  touch-action: manipulation;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #d2a84a;
+  outline-offset: 2px;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes brickdrop {
+  0% { transform: translateY(-40px); opacity: 0; }
+  60% { transform: translateY(4px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scorepop {
+  0% { transform: scale(1.35); text-shadow: 0 0 18px rgba(255, 210, 74, 0.9); }
+  60% { transform: scale(0.96); }
+  100% { transform: scale(1); text-shadow: 0 0 0 rgba(255, 210, 74, 0); }
+}
+
+@keyframes pulseglow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 10px rgba(237, 28, 36, 0.35)); }
+  50% { transform: scale(1.025); filter: drop-shadow(0 6px 18px rgba(237, 28, 36, 0.55)); }
+}
+
+@keyframes screenenter {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countpop {
+  0% { transform: scale(2.4); opacity: 0; }
+  40% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.anim-brickdrop { animation: brickdrop 0.5s ease-out both; }
+.anim-floaty { animation: floaty 3s ease-in-out infinite; }
+.anim-pulse-soft { animation: pulse-soft 1.6s ease-in-out infinite; }
+.anim-scorepop { animation: scorepop 0.35s ease-out; }
+.anim-pulseglow { animation: pulseglow 1.8s ease-in-out infinite; }
+.screen-enter { animation: screenenter 0.3s ease-out both; }
+.anim-countpop { animation: countpop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-brickdrop, .anim-floaty, .anim-pulse-soft, .anim-scorepop,
+  .anim-pulseglow, .screen-enter, .anim-countpop { animation: none; }
+}
+
+.reduced-motion .anim-brickdrop,
+.reduced-motion .anim-floaty,
+.reduced-motion .anim-pulse-soft,
+.reduced-motion .anim-scorepop,
+.reduced-motion .anim-pulseglow,
+.reduced-motion .screen-enter,
+.reduced-motion .anim-countpop {
+  animation: none;
+}
